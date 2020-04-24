@@ -1,7 +1,7 @@
 ---
-title: "Aides Drug"
-author: "Put your name here!"
-date: "put the date here"
+title: "AIDS Drug"
+author: "Jacob Welsh"
+date: "16 April 2020"
 output: html_document
 ---
 
@@ -21,25 +21,195 @@ A new  preventative aides (triUmpsal) is under test in clinical trials. Analyze 
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
-#Results
+All questions are categorical-categorical, as a result we will use the same methods for graphical descriptions, numerical descriptions, and inferences.  
+Graphical Descriptions will be Bar Charts.  
+Numerical Descriptions will be cross tables.  
+Inferentials wil; be a chi-square test and/or fisher test exact test.    
 
-<!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
+The conclusion for all the questions will be described at the end.  
 
-## Descriptive Results
+This is true for all 5 questions.  
 
-### Graphical Descriptive Results
+## Question 1 : Is the drug effective in the general population?  
+
+The first question is whether or not the vaccine was effective in the whole population. 
+
+$H_0$ : The drug has no effect on whether or not one gets AIDS.  
+
+$H_A$ : The drug does have an effect on whether or not one gets AIDS.  
+
+### Descriptive Results
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
+
+```{r}
+barchartGC(~infected + treatment,data=triUmp, type ="percent")
+```
+
+The barchart shows that the vaccine may have an effect whether one aquires aids or not. The percentage for those that got AIDS was lower than those with the placebo.
 
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
-## Inferential Results
+```{r}
+table1 <- xtabs(~infected + treatment, data=triUmp)
+
+rowPerc(table1)
+```
+This is row percentages, it shows... 
+
+```{r}
+colPerc(table1)
+```
+This is a table of column percentages, it shows... 
+
+
+
+### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
 
-# Discussion and Conclusion
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+For the chi-squared test the p-value was 0.00000002. This is less than 0.05, so we have evidence to reject the null hypothesis.
+
+## Question 2 Is the drug effective in the LGBTQ population?  
+
+$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS. 
+$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
+
+### Descriptive Results
+```{r}
+LGBTQdata = filter(triUmp, LGBTQ != "straight")
+
+barchartGC(~infected + treatment,data=LGBTQdata , type ="percent")
+```
+
+The drug would appear to have an adverse affect on the LGBTQ community, as there is more than 60% of those who had the drug contracted AIDS.
+
+### Numerical Results
+```{r}
+table2 <- xtabs(~infected + treatment, data=LGBTQdata)
+
+rowPerc(table2)
+```
+This is row percentages, it shows... 
+
+```{r}
+colPerc(table2)
+```
+This is a table of column percentages, it shows...
+### Inferential Results
+```{r}
+chisq.test(table2)
+chisqtestGC(table2)
+fisher.test(table2)
+```
+
+
+## Question 2 Is the drug effective in the LGBTQ population?  
+
+$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS. 
+$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
+
+### Descriptive Results
+```{r}
+barchartGC(~infected + treatment,data=triUmp, type ="percent")
+```
+### Numerical Results
+```{r}
+table1 <- xtabs(~infected + treatment, data=triUmp)
+
+rowPerc(table1)
+```
+This is row percentages, it shows... 
+
+```{r}
+colPerc(table1)
+```
+This is a table of column percentages, it shows...
+### Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+## Question 2 Is the drug effective in the LGBTQ population?  
+
+$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS. 
+$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
+
+### Descriptive Results
+```{r}
+barchartGC(~infected + treatment,data=triUmp, type ="percent")
+```
+### Numerical Results
+```{r}
+table1 <- xtabs(~infected + treatment, data=triUmp)
+
+rowPerc(table1)
+```
+This is row percentages, it shows... 
+
+```{r}
+colPerc(table1)
+```
+This is a table of column percentages, it shows...
+### Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+## Question 2 Is the drug effective in the LGBTQ population?  
+
+$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS.  
+
+
+$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
+
+### Descriptive Results
+```{r}
+barchartGC(~infected + treatment,data=triUmp, type ="percent")
+```
+### Numerical Results
+```{r}
+table1 <- xtabs(~infected + treatment, data=triUmp)
+
+rowPerc(table1)
+```
+This is row percentages, it shows... 
+
+```{r}
+colPerc(table1)
+```
+This is a table of column percentages, it shows...
+### Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+
+
+
+
+
+### Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+
+Here is a summary of the results:
+
+Question 1: The drug is effective in preventing one in thr general population from aquiring AIDS. We reccomend this drug be used.
+
+Question 2: The drug is effective in bringing on the contraction of AIDS in the LGBTQ community, it is not reccomended.
