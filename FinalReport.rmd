@@ -32,7 +32,7 @@ This is true for all 5 questions.
 
 ## Question 1 : Is the drug effective in the general population?  
 
-The first question is whether or not the vaccine was effective in the whole population. 
+
 
 $H_0$ : The drug has no effect on whether or not one gets AIDS.  
 
@@ -57,12 +57,13 @@ table1 <- xtabs(~infected + treatment, data=triUmp)
 
 rowPerc(table1)
 ```
-This is row percentages, it shows... 
+This is row percentages, it shows that of the people given the drug, 19% less had contracted AIDS at 40.87, while those with the placebo were infected at 59.13 rate. It also shows that among those who did not contract AIDS, the drug and placebo made little difference.
+
 
 ```{r}
 colPerc(table1)
 ```
-This is a table of column percentages, it shows... 
+This is a table of column percentages, it shows that of the people on the drug, 3.99 percent contracted AIDS, and 96.01 did not. 5.49 percent of people on the placebo contracted AIDS, while 94.51 percent did not contract the disease.
 
 
 
@@ -77,11 +78,18 @@ chisqtestGC(table1)
 fisher.test(table1)
 ```
 
-For the chi-squared test the p-value was 0.00000002. This is less than 0.05, so we have evidence to reject the null hypothesis.
+For the chi-squared test the p-value was 0.00000002. This is less than 0.05, so we have evidence to reject the null hypothesis, implying that the drug does in fact have some sort of effect on the general population.  
+
+
+
+
 
 ## Question 2 Is the drug effective in the LGBTQ population?  
 
-$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS. 
+
+$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS.   
+
+
 $H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
 
 ### Descriptive Results
@@ -99,12 +107,16 @@ table2 <- xtabs(~infected + treatment, data=LGBTQdata)
 
 rowPerc(table2)
 ```
-This is row percentages, it shows... 
+This is row percentages, it shows that among people who contracted AIDS, 72.38% were on the drug, while 27.62% of them were on the placebo. This also shows that it is pretty even on those not infected,49.05% of them came from the drug group, and 50.95% came from the placebo group.  
+
 
 ```{r}
 colPerc(table2)
 ```
-This is a table of column percentages, it shows...
+This is a table of column percentages, it shows that of people that recieved the drug, 7.02 percent contracted AIDS, while 92.98 percent remained clean. It shows that of those on the placebo 2.7% contracted AIDS and 97.3% did not contract the disease.
+
+
+
 ### Inferential Results
 ```{r}
 chisq.test(table2)
@@ -112,11 +124,44 @@ chisqtestGC(table2)
 fisher.test(table2)
 ```
 
+Pearson's Chi-squared test has p-value = 5.029e-06, or .000005029. Because this number is smaller than .05, we will reject our null hypothesis. This means the drug DOES have an effect on the LGBTQ population, as seen above however, it is adverse and the drug increases the odds of contracting AIDS. The Fisher's test gives you the odds of being 2.7 times more likely to contract the disease.
 
-## Question 2 Is the drug effective in the LGBTQ population?  
 
-$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS. 
-$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
+## Question 3 Is the drug effective in the female population?  
+
+$H_0$: The drug has no effect on whether or not females contract AIDS.  
+
+$H_A$: The drug does have some effect on whether or not females contract AIDS?  
+
+
+### Descriptive Results
+```{r}
+FemalesData = filter(triUmp, gender == 'F')
+barchartGC(~infected + treatment,data=FemalesData, type ="percent")
+```
+### Numerical Results
+```{r}
+table3 <- xtabs(~infected + treatment, data=FemalesData)
+
+rowPerc(table3)
+```
+This is row percentages, it shows... 
+
+```{r}
+colPerc(table1)
+```
+This is a table of column percentages, it shows...
+### Inferential Results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+## Question 4 Is the drug effective in the ?  
+
+$H_0$: The drug has no effect on members in the 
+$H_A$: The drug does have some effect in the 
 
 ### Descriptive Results
 ```{r}
@@ -141,40 +186,12 @@ chisqtestGC(table1)
 fisher.test(table1)
 ```
 
-## Question 2 Is the drug effective in the LGBTQ population?  
+## Question 5 Is the drug effective in the ?  
 
-$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS. 
-$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
-
-### Descriptive Results
-```{r}
-barchartGC(~infected + treatment,data=triUmp, type ="percent")
-```
-### Numerical Results
-```{r}
-table1 <- xtabs(~infected + treatment, data=triUmp)
-
-rowPerc(table1)
-```
-This is row percentages, it shows... 
-
-```{r}
-colPerc(table1)
-```
-This is a table of column percentages, it shows...
-### Inferential Results
-```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
-```
-
-## Question 2 Is the drug effective in the LGBTQ population?  
-
-$H_0$: The drug has no effect on members in the LGBTQ population contracting AIDS.  
+$H_0$: The drug has no effect on members in the 
 
 
-$H_A$: The drug does have some effect in the LGBTQ population contracting AIDS.
+$H_A$: The drug does have some effect in the 
 
 ### Descriptive Results
 ```{r}
