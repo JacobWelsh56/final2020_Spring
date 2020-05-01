@@ -131,7 +131,9 @@ Pearson's Chi-squared test has p-value = 5.029e-06, or .000005029. Because this 
 
 $H_0$: The drug has no effect on whether or not females contract AIDS.  
 
-$H_A$: The drug does have some effect on whether or not females contract AIDS?  
+$H_A$: The drug does have some effect on whether or not females contract AIDS?   
+   
+   
 
 
 ### Descriptive Results
@@ -139,84 +141,105 @@ $H_A$: The drug does have some effect on whether or not females contract AIDS?
 FemalesData = filter(triUmp, gender == 'F')
 barchartGC(~infected + treatment,data=FemalesData, type ="percent")
 ```
-### Numerical Results
+
+### Numerical Results  
+
 ```{r}
 table3 <- xtabs(~infected + treatment, data=FemalesData)
 
 rowPerc(table3)
 ```
-This is row percentages, it shows... 
+This is row percentages, it shows that of those who contracted AIDS 58.82% were on the test drug while the other 41.18% were on the placebo, which makes the drug look a little bad. Among those who did not contract AIDS it was once again fairly close, 48.06% were on the drug, with 51.94% being on the placebo.
 
 ```{r}
-colPerc(table1)
+colPerc(table3)
 ```
-This is a table of column percentages, it shows...
+This is a table of column percentages, it shows that among those on tge drug, only 3.69% contracted AIDS, while 2.42% of those on the placebo contracted the disease. The drug group escaped contracting the disease 96.31% of the time, while those on the placebo avoided it 97.58% of the time.
 ### Inferential Results
 ```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
+chisq.test(table3)
+chisqtestGC(table3)
+fisher.test(table3)
 ```
 
-## Question 4 Is the drug effective in the ?  
+According the Chi-squared test the p-value = 7.686e-05, or .00007686, this small of a number means we are going to reject our null hypothesis, that this has no effect on the female population. There seems to be an effect in that females become a little bit more likely to catch the disease. The Fisher's exact test gives them a 1.5x more likely chance.
 
-$H_0$: The drug has no effect on members in the 
-$H_A$: The drug does have some effect in the 
+
+## Question 4 Is the drug effective in the male poplulation?   
+
+$H_0$: The drug has no effect on members in the male population.  
+
+$H_A$: The drug does have some effect in the male population.  
+
 
 ### Descriptive Results
 ```{r}
-barchartGC(~infected + treatment,data=triUmp, type ="percent")
+MalesData = filter(triUmp, gender == 'M')
+barchartGC(~infected + treatment,data=MalesData, type ="percent")
 ```
+
+At the first look of this barchart, it would seem the drug has a significant positive effect on the male population, of the males the contracted AIDS. only aroud 30% seem to have come from the group that contained the test drug.  
+
 ### Numerical Results
 ```{r}
-table1 <- xtabs(~infected + treatment, data=triUmp)
+table4 <- xtabs(~infected + treatment, data=MalesData)
 
-rowPerc(table1)
+rowPerc(table4)
 ```
-This is row percentages, it shows... 
+This is row percentages, it shows that the of those who contracted AIDS, only 31.42% contracted AIDS in the group given the drug and 68.58% of the infected came from the placebo group. For the people who did not contract AIDS, as seen in all previous questions it is about the same, 50.38% were on the drug, 49.62% were not. So far it looks pretty good for the male population.  
+
 
 ```{r}
-colPerc(table1)
+colPerc(table4)
 ```
-This is a table of column percentages, it shows...
+This is a table of column percentages, it shows that of the people on the drug, 4.35% contracted AIDS, while the other 95.65% did not. It also shows that of the people on the placebo group, 9.16% contracted AIDS, while 90.84% did not. Again, looks good for the men, with the higher contraction being on the placebo side.  
+
 ### Inferential Results
 ```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
+chisq.test(table4)
+chisqtestGC(table4)
+fisher.test(table4)
 ```
 
-## Question 5 Is the drug effective in the ?  
+With the p-value in the Chi test being somewhere around 0000000000000002.2 we are rejecting this null hypothesis, the drug most certainly has an effect on the male population in that less of them contract the disease. In the Fisher Exact test, you have odds of being half less likely to contract AIDS.  
 
-$H_0$: The drug has no effect on members in the 
+## Question 5 Is the drug effective in the drug using community?  
+
+$H_0$: The drug has no effect on members in the drug using community.
 
 
-$H_A$: The drug does have some effect in the 
+$H_A$: The drug does have some effect in the drug using community.
 
 ### Descriptive Results
 ```{r}
-barchartGC(~infected + treatment,data=triUmp, type ="percent")
+DrugUserData = filter(triUmp, DrugUser == "yes")
+barchartGC(~infected + treatment,data=DrugUserData, type ="percent")
 ```
+
+This barchart is showing some strong positive effect from the drug, here it would seem that among those who contracted AIDS it looks to be about 25% came from those on the test drug, while the other 75% came from the placebo group. Those who did not contract are again about even between groups.  
+
+
 ### Numerical Results
 ```{r}
-table1 <- xtabs(~infected + treatment, data=triUmp)
+table5 <- xtabs(~infected + treatment, data=DrugUserData)
 
-rowPerc(table1)
+rowPerc(table5)
 ```
-This is row percentages, it shows... 
+This is row percentages, it shows that of all those who contracted AIDS, only 24.29% came from the test drug group, while 75.71% came from the placebo group, this shows a strong positive effect. Among those who did not contract AIDS 47.59% came from the group on the test drug, with the other 52.41% being from the placebo.  
 
 ```{r}
-colPerc(table1)
+colPerc(table5)
 ```
-This is a table of column percentages, it shows...
+This is a table of column percentages, it shows that of the people on the drug, 2.89% contracted the disease, while 97.11% did not. For the placebo group 7.77% were infected, while 92.23% did go clean. This shows again the the drug is in fact having an effect. 
+
 ### Inferential Results
 ```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
+chisq.test(table5)
+chisqtestGC(table5)
+fisher.test(table5)
 ```
 
-
+The Chi-squared test give us a p-value = 1.242e-07, or .0000001245. This small number means we reject the null hypothesis. There is what seems to be a strong positive effect from the test drug on the group of Drug Users, the Fisher test gives them odds at a bit more than a third of a chance to contract.  
 
 
 
@@ -227,6 +250,14 @@ fisher.test(table1)
 
 Here is a summary of the results:
 
-Question 1: The drug is effective in preventing one in thr general population from aquiring AIDS. We reccomend this drug be used.
+Question 1: The drug is effective in preventing a person in the General Population from aquiring AIDS. It would be good to use in this population.
 
-Question 2: The drug is effective in bringing on the contraction of AIDS in the LGBTQ community, it is not reccomended.
+Question 2: The drug is effective in bringing on the contraction of AIDS in the LGBTQ community. It would not be good to use in this population.  
+
+Question 3: The drug is effective in bringing on the contraction of AIDS in the Female population. It would not be good to use in this population.
+
+Question 4: The drug is effective in preventing a person in the Male population from aquiring AIDS. It would be good to use in this population.
+
+Question 5: The drug is effective in preventing a person in the Drug Using population from aquiring AIDS. It would be good to use in this population.
+
+In three out of five of the groups, the drug perfroms to it's intended purpose of prevents AIDS. However in the LGBTQ and Female populations it is harmful and increases the likelihood of memebers of those groups to contract AIDS. This drug would likely be very beneficial for the Male and Drug using populations, but it would likely be a disaster for the Female and LGBTQ communities.
